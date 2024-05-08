@@ -5,15 +5,33 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="https://cdn.tailwindcss.com"></script>
-  <script type="text/javascript" src="./script.js"></script>
 </head>
 
 <body>
   <div class="w-full h-screen flex justify-center items-center">
-    <h1 class="text-xl font-bold">
-      xin chao` tieu Hanh nhaaaa ^^
-    </h1>
+    <canvas id="canvas"></canvas>
   </div>
 </body>
 
 </html>
+
+<script>
+  const canvas = document.getElementById("canvas")
+  const ctx = canvas.getContext("2d");
+
+  const ball = {
+    x: 100,
+    y: 100,
+    radius: 25,
+    color: "blue",
+    draw() {
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, true);
+      ctx.closePath();
+      ctx.fillStyle = this.color;
+      ctx.fill();
+    },
+  };
+
+  ball.draw();
+</script>
