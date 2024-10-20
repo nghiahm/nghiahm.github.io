@@ -5,33 +5,79 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <title>App</title>
 </head>
 
 <body>
-  <div class="w-full h-screen flex justify-center items-center">
-    <canvas id="canvas"></canvas>
+  <div id="app">
+    <div class="w-full mx-auto h-screen flex justify-center items-center">
+      <form class="flex flex-col justify-center gap-4 max-w-sm w-full p-4" @submit.prevent="onSubmit">
+        <label for="password" class="block font-medium text-center">Nhập password vào nha ❤️</label>
+        <input type="password" id="password" v-model="password"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+          required />
+        <button type="submit"
+          class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm py-2.5">Vào
+          thôi</button 
+      </form>
+    </div>
   </div>
 </body>
 
 </html>
 
 <script>
-  const canvas = document.getElementById("canvas")
-  const ctx = canvas.getContext("2d");
+  const { createApp, ref } = Vue
 
-  const ball = {
-    x: 100,
-    y: 100,
-    radius: 25,
-    color: "blue",
-    draw() {
-      ctx.beginPath();
-      ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, true);
-      ctx.closePath();
-      ctx.fillStyle = this.color;
-      ctx.fill();
-    },
-  };
+  createApp({
+    setup() {
+      const password = ref()
 
-  ball.draw();
+      const onSubmit = () => {
+        if (password.value === '111') {
+          console.log(123);
+        }
+      }
+
+      return {
+        password,
+        onSubmit
+      }
+    }
+  }).mount('#app')
+  // const canvas = document.getElementById("canvas")
+  // const ctx = canvas.getContext("2d");
+
+  // const ball = {
+  //   x: 100,
+  //   y: 100,
+  //   radius: 25,
+  //   color: "blue",
+  //   draw() {
+  //     ctx.beginPath();
+  //     ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, true);
+  //     ctx.closePath();
+  //     ctx.fillStyle = this.color;
+  //     ctx.fill();
+  //   },
+  // };
+
+  // ball.draw();
+
+
+  // document.getElementById('loginForm').addEventListener('submit', function(event) {
+  //   event.preventDefault();
+
+  //   const password = document.getElementById('password').value;
+  //   let isValid = false
+    
+  //   if (password === '111') {
+  //     isValid = true;
+  //   }
+
+  //   if (isValid) {
+  //     alert('Login successful');
+  //   }
+  // });
 </script>
