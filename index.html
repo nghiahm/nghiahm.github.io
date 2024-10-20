@@ -12,72 +12,62 @@
 <body>
   <div id="app">
     <div class="w-full mx-auto h-screen flex justify-center items-center">
-      <form class="flex flex-col justify-center gap-4 max-w-sm w-full p-4" @submit.prevent="onSubmit">
-        <label for="password" class="block font-medium text-center">Nhập password vào nha ❤️</label>
-        <input type="password" id="password" v-model="password"
+      <template v-if="currentStep === 0">
+        <form class="flex flex-col justify-center gap-4 max-w-sm w-full p-4" @submit.prevent="onSubmit">
+          <label for="password" class="block text-xl font-medium text-center">Nhập password vào nha ❤️</label>
+          <input type="password" id="password" v-model="password" autofocus
           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
           required />
-        <button type="submit"
-          class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm py-2.5">Vào
-          thôi</button 
-      </form>
+          <button type="submit"
+          class="text-xl text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm py-2.5">Vào
+          thôi !!!</button 
+        </form>
+      </template>
+      <template v-else-if="currentStep === 1">
+        <div class="flex flex-col gap-4">
+          <span class="text-xl font-medium text-center">Em click vào thiệp nhé 😍</span>
+          <img class="object-cover h-auto max-w-xs border" src="images/envelope.png" @click="onClickEnvelope">
+        </div>
+      </template>
+      <template v-else-if="currentStep === 2">
+        <div class="flex flex-col gap-4">
+          <span class="text-3xl font-medium text-center">ANH YÊU EM 😘 MUAHH!</span>
+          <iframe src="https://giphy.com/embed/3oz8xsaLjLVqVXr3tS" width="480" height="269" frameBorder="0" allowFullScreen></iframe></p>
+        </div>
+      </template>
     </div>
   </div>
 </body>
-
 </html>
 
+<style>
+    
+</style>
+
 <script>
-  const { createApp, ref } = Vue
+  const { createApp, ref, onMounted } = Vue
 
   createApp({
     setup() {
-      const password = ref()
+      const password = ref('')
+      const currentStep = ref(0)
 
       const onSubmit = () => {
-        if (password.value === '111') {
-          console.log(123);
+        if (password.value === 'camnguyenxinhdep') {
+          currentStep.value = 1
         }
+      }
+
+      const onClickEnvelope = () => {
+        currentStep.value = 2
       }
 
       return {
         password,
-        onSubmit
+        currentStep,
+        onSubmit,
+        onClickEnvelope
       }
     }
   }).mount('#app')
-  // const canvas = document.getElementById("canvas")
-  // const ctx = canvas.getContext("2d");
-
-  // const ball = {
-  //   x: 100,
-  //   y: 100,
-  //   radius: 25,
-  //   color: "blue",
-  //   draw() {
-  //     ctx.beginPath();
-  //     ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, true);
-  //     ctx.closePath();
-  //     ctx.fillStyle = this.color;
-  //     ctx.fill();
-  //   },
-  // };
-
-  // ball.draw();
-
-
-  // document.getElementById('loginForm').addEventListener('submit', function(event) {
-  //   event.preventDefault();
-
-  //   const password = document.getElementById('password').value;
-  //   let isValid = false
-    
-  //   if (password === '111') {
-  //     isValid = true;
-  //   }
-
-  //   if (isValid) {
-  //     alert('Login successful');
-  //   }
-  // });
 </script>
